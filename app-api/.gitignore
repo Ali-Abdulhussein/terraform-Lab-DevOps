@@ -1,0 +1,8 @@
+
+#vs code
+obj/
+bin/
+.vscode/
+
+# Terraform
+.terraform
