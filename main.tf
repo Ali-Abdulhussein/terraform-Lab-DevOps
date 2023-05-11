@@ -31,7 +31,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_container_group" "cg" {
-  name                = "app-api"
+  name                = "app-api-container"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   
@@ -40,8 +40,8 @@ resource "azurerm_container_group" "cg" {
   os_type             = "Linux"
 
   container {
-    name   = "aliabdulhussein/app-api"
-    image  = "aliabdulhussein/app-api"
+    name   = "app-api"
+    image  = "aliabdulhussein/app-api:latest"
     cpu    = "1"
     memory = "1"
 
