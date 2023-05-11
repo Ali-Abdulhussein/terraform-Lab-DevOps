@@ -41,7 +41,7 @@ resource "azurerm_container_group" "cg" {
 
   container {
     name   = "app-api"
-    image  = "aliabdulhussein/app-api:latest"
+    image  = "aliabdulhussein/app-api:5"
     cpu    = "1"
     memory = "1"
 
