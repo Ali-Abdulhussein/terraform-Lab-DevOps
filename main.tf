@@ -7,6 +7,13 @@ terraform {
       version = "~> 3.0.2"
     }
   }
+  backend "azurerm" {
+    resource_group_name = "tf_rg_blobstorage"
+    storage_account_name = "tfstoragestatefile"
+    container_name = "tfstatefilecontainer"
+    key = "terraform.tfstate"
+    
+  }
   required_version = ">=0.12"
 }
 
@@ -33,7 +40,7 @@ resource "azurerm_container_group" "cg" {
   os_type             = "Linux"
 
   container {
-    name   = "app-api"
+    name   = "aliabdulhussein/app-api"
     image  = "aliabdulhussein/app-api"
     cpu    = "1"
     memory = "1"
