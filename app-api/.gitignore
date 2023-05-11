@@ -7,9 +7,10 @@ bin/
 # Terraform
 .terraform
 .terraform.*
+terraform.*
 
 #Docker 
 
 
 #Bash files
-# .bashrc
+.bashrc
