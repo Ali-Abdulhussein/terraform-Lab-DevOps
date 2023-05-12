@@ -8,11 +8,11 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name = "tf_rg_blobstorage"
+    resource_group_name  = "tf_rg_blobstorage"
     storage_account_name = "tfstoragestatefile"
-    container_name = "tfstatefilecontainer"
-    key = "terraform.tfstate"
-    
+    container_name       = "tfstatefilecontainer"
+    key                  = "terraform.tfstate"
+
   }
   required_version = ">=0.12"
 }
@@ -24,7 +24,7 @@ provider "azurerm" {
 }
 #should by just the last part of Pipeline Variable TF_VAR_(imagebuild):
 variable "imagebuild" {
-  type = string
+  type        = string
   description = "Latest Image Build TF_VAR_(imagebuild)"
 }
 #Resource block and can also move to its own file
@@ -37,14 +37,14 @@ resource "azurerm_container_group" "cg" {
   name                = "app-api-container"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  
-  ip_address_type     = "Public"
-  dns_name_label      = "trLabDevopsAppApi"
-  os_type             = "Linux"
+
+  ip_address_type = "Public"
+  dns_name_label  = "trLabDevopsAppApi"
+  os_type         = "Linux"
 
   container {
     name   = "app-api"
-    image  = "aliabdulhussein/app-api:${}"
+    image  = "aliabdulhussein/app-api:${var.imagebuild}"
     cpu    = "1"
     memory = "1"
 
