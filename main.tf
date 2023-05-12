@@ -22,8 +22,11 @@ terraform {
 provider "azurerm" {
   features {}
 }
-
-
+#should by just the last part of Pipeline Variable TF_VAR_(imagebuild):
+variable "imagebuild" {
+  type = string
+  description = "Latest Image Build TF_VAR_(imagebuild)"
+}
 #Resource block and can also move to its own file
 resource "azurerm_resource_group" "rg" {
   name     = "tr_devops_rg"
@@ -41,7 +44,7 @@ resource "azurerm_container_group" "cg" {
 
   container {
     name   = "app-api"
-    image  = "aliabdulhussein/app-api:5"
+    image  = "aliabdulhussein/app-api:${}"
     cpu    = "1"
     memory = "1"
 
