@@ -52,7 +52,26 @@ stages:
             ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
             ARM_TENANT_ID: $(ARM_TENANT_ID)
             TF_VAR_imagebuild: $(tag)
-            
+- stage: KeyVaultAccess
+  displayName: "Check KeyVaut Secret"
+  jobs:
+    - job: ReadKeyVaultSecret
+      displayName: "Get Key-Vault Secret Value"
+      pool:
+        vmImage: ubuntu-latest      
+      steps:
+      - task: AzureKeyVault@2
+        inputs:
+          azureSubscription: 'sp-keyvault'
+          KeyVaultName: 'keyvault-test-00001'
+          SecretsFilter: '*'
+          RunAsPreJob: false
+      - task: CmdLine@2
+        displayName: "Use Key-Vault Secret"
+        inputs:
+          script: |
+            echo 'SQLPassword:'$(SQLPassword)
+        
 
 
       
