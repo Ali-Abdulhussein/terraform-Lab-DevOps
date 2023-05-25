@@ -34,6 +34,7 @@ stages:
   jobs:
     - job: Provision
       displayName: "Provision Container INstance"
+      condition: eq(variables.toCleanResource, false)
       pool:
         vmImage: ubuntu-latest
       variables:
@@ -53,7 +54,8 @@ stages:
             ARM_TENANT_ID: $(ARM_TENANT_ID)
             TF_VAR_imagebuild: $(tag)
     - job: ResourCeleaning
-      displayName: "Provision Container INstance"
+      displayName: "Cleaning resource"
+      condition: eq(variables.toCleanResource, true)
       pool:
         vmImage: ubuntu-latest
       variables:
